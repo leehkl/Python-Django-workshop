@@ -46,3 +46,47 @@ def add(x, y):
 	print x + y
 
 add(5, 3)	
+
+#or operator 
+def even_odd(z):
+	if z % 2 == 0 or z % 2 == 3:
+		print "%s is even!" % z
+	else:
+		print "%r is odd!" % z
+
+even_odd(1)
+even_odd(2)
+even_odd(3)
+
+#classes, methods are functions inside of classes
+class BankAccount():
+	#called dunderinit
+	def __init__(self, balance):
+		self.balance = balance
+
+	def withdraw(self, amount):
+		self.balance -= amount
+		return self.balance
+
+	def deposit(self, amount):
+		self.balance += amount
+
+susan = BankAccount(1000000)
+print susan.balance
+susan.deposit(1000000)
+print susan.balance
+susan.withdraw(1000000)
+print susan.balance
+
+#inheritance
+class MinBalanceAccount(BankAccount):
+	def __init__(self, balance, minimum_balance):
+		BankAccount.__init__(self, balance)
+		self.minimum_balance = minimum_balance
+	def withdraw(self, amount):
+		if self.balance - amount < self.minimum_balance:
+			print "Sorry, min balance must be maintained"
+		else:
+			BankAccount.withdraw(self, amount)
+bob = MinBalanceAccount(120, 100)
+bob.withdraw(50)
